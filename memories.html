@@ -3,21 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Memories - Medis GELORA FEB 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <style>
-    .slideshow {
-      position: relative;
-      max-width: 700px;
-      margin: auto;
-    }
-    .slides {
-      display: none;
-    }
-    .slides img {
-      width: 100%;
-      border-radius: 15px;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -28,36 +15,21 @@
   <nav>
     <a href="index.html">Beranda</a>
     <a href="about.html">About Us</a>
-    <a href="memories.html">Memories</a>
+    <a href="memories.html" class="active">Memories</a>
     <a href="data.html">Data</a>
   </nav>
 
   <div class="container">
     <h2>Memories</h2>
-    <div class="slideshow">
-      <div class="slides"><img src="assets/mem1.jpg"></div>
-      <div class="slides"><img src="assets/mem2.jpg"></div>
-      <div class="slides"><img src="assets/mem3.jpg"></div>
+    <div class="gallery">
+      <img src="assets/mem1.jpg" alt="Memories 1">
+      <img src="assets/mem2.jpg" alt="Memories 2">
+      <img src="assets/mem3.jpg" alt="Memories 3">
     </div>
   </div>
 
   <footer>
     © 2025 Medis GELORA FEB
   </footer>
-
-  <script>
-    let slideIndex = 0;
-    showSlides();
-    function showSlides() {
-      let slides = document.getElementsByClassName("slides");
-      for (let i=0; i<slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      slideIndex++;
-      if (slideIndex > slides.length) {slideIndex = 1}
-      slides[slideIndex-1].style.display = "block";
-      setTimeout(showSlides, 3000);
-    }
-  </script>
 </body>
 </html>
