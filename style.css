@@ -60,10 +60,9 @@ nav a:hover {
 .hero-img {
   width: 100%;
   aspect-ratio: 16/9;     /* bikin rasio fix 16:9 */
-  object-fit: cover;      /* isi penuh tanpa distorsi */
+  object-fit: contain;      
   border-radius: 12px;
   margin: 20px 0;
-  display: block;
 }
 
 .hero h2 {
