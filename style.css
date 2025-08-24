@@ -57,6 +57,16 @@ nav a:hover {
   background: #f0f8ff;
 }
 
+.hero-banner {
+  width: 100%;
+  aspect-ratio: 16/9;     /* selalu jaga rasio */
+  background-image: url("assets/foto_utama.png");
+  background-size: cover; /* isi penuh */
+  background-position: center; /* fokus tengah */
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
 .hero-img {
   width: 100%;
   aspect-ratio: 16/9;     /* bikin rasio fix 16:9 */
