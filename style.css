@@ -110,9 +110,9 @@ nav a.active {
 }
 
 .about-closing p {
-  max-width: 600px;  
-  margin: 0;
-  font-size: 1.2rem;
+  max-width: 750px;  
+  margin: 20px anuto 40px;
+  font-size: 1.1rem;
   line-height: 1.6;
   text-align: center; 
   font-style: italic;
