@@ -124,26 +124,26 @@ nav a.active {
 /* Grid dasar tim */
 .team {
   display: grid;
-  gap: 20px;
-  justify-content: center;
+  gap: 25px;            /* jarak antar member */
+  justify-items: center; /* member tetap di tengah */
   margin-bottom: 30px;
 }
 
-/* Koor & Subkoor (2 kolom 1:1) */
+/* Koor & Subkoor (2 kolom) */
 .koor-subkoor {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   max-width: 600px;
   margin: 0 auto;
 }
 
-/* Staff ahli (3 kolom) */
+/* Staff ahli (3 kolom fleksibel) */
 .staff-ahli {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
-/* Staff muda (5 kolom, otomatis jadi 3 baris) */
+/* Staff muda (fleksibel, responsive) */
 .staff-muda {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 /* Member styling */
@@ -153,32 +153,37 @@ nav a.active {
 
 .member img {
   width: 100%;
-  aspect-ratio: 1/1;     /* foto jadi kotak 1:1 */
+  max-width: 180px;      /* ukuran maksimal agar tidak terlalu besar */
+  aspect-ratio: 1/1;     
   object-fit: cover;
-  border-radius: 12px;   /* sudut kotak, bukan bulet */
+  border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   margin-bottom: 10px;
 }
 
 .member .name {
   font-weight: 700;
-  color: #000;
+  color: #004aad;       /* warna biru header */
 }
 
 .member .prodi {
   font-weight: 400;
-  color: #666;
+  color: #555;
   font-size: 0.9em;
 }
 
+/* RESPONSIVE */
 @media (max-width: 768px) {
-  .staff-muda {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .staff-ahli {
+  .staff-muda, .staff-ahli {
     grid-template-columns: repeat(2, 1fr);
   }
   .koor-subkoor {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-muda, .staff-ahli {
     grid-template-columns: 1fr;
   }
 }
