@@ -5,8 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Chat - Medis GELORA FEB 2025</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background: #004aad;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #01337d;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a.active {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
     .chat-box {
       background: #fff;
       padding: 20px;
@@ -59,6 +96,14 @@
       margin-top:4px;
       text-align:right;
     }
+
+    footer {
+      background: #004aad;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
@@ -69,9 +114,9 @@
 
   <nav>
     <a href="index.html">Beranda</a>
-    <a href="about.html" class="active">About Us</a>
+    <a href="about.html">About Us</a>
     <a href="memories.html">Memories</a>
-    <a href="data.html">Data</a>
+    <a href="data.html" class="active">Data</a>
   </nav>
 
   <div class="container">
