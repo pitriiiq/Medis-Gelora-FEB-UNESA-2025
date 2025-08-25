@@ -233,11 +233,11 @@ nav a.active {
 }
 
 .gallery-video video {
-  max-width: 70%;   /* batasi lebar */
-  max-height: 80vh; /* batasi tinggi biar nggak kepanjangan */
-  width: auto;      /* biar rasio aslinya terjaga */
-  height: auto;
+  width: auto;
+  height: 80vh;       /* utamakan tinggi */
+  aspect-ratio: 9/16; /* paksa rasio potret */
   border-radius: 12px;
+  object-fit: cover;  /* biar nggak gepeng */
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
