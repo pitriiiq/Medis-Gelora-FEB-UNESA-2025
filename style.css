@@ -205,6 +205,19 @@ nav a.active {
   display: block;  /* biar ga ada spasi bawah */
 }
 
+.gallery-video {
+  display: flex;
+  justify-content: center;  /* posisi tengah horizontal */
+  margin-top: 20px;
+}
+
+.gallery-video video {
+  width: 70%;      /* bisa disesuaikan */
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
 .gallery img:hover {
   transform: scale(1.03);
 }
