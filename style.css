@@ -1,189 +1,136 @@
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #fdfdfd;
-  color: #222;
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Data - Medis GELORA FEB 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; margin:0; background:#fdfdfd; }
+    header { text-align:center; padding:60px 20px; background:linear-gradient(135deg,#005bea,#00c6fb); color:white; }
+    nav { text-align:center; background:#004aad; padding:15px; }
+    nav a { color:white; margin:0 15px; text-decoration:none; font-weight:600; }
+    nav a.active { text-decoration: underline; }
+    nav a:hover { opacity:0.8; }
+    .container { padding:40px; max-width:800px; margin:auto; }
+    h2 { color:#004aad; margin-bottom:20px; text-align:center; }
+    footer { text-align:center; padding:20px; background:#004aad; color:white; margin-top:40px; }
 
-header {
-  text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #005bea, #00c6fb);
-  color: white;
-}
+    /* Chat form */
+    form { margin-bottom:20px; text-align:center; }
+    textarea {
+      width:100%; max-width:600px;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      font-size:16px;
+      resize:none;
+    }
+    button {
+      margin-top:10px;
+      padding:10px 20px;
+      border:none;
+      border-radius:8px;
+      background:#004aad;
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+    }
+    button:hover { opacity:0.9; }
 
-header h1 {
-  font-size: 32px;
-  margin: 0;
-}
+    /* Chat box */
+    #chatBox {
+      margin-top:20px;
+      text-align:left;
+      background:#fff;
+      padding:15px;
+      border-radius:12px;
+      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+      max-height:400px;
+      overflow-y:auto;
+    }
+    #chatBox p {
+      background:#f0f8ff;
+      padding:10px;
+      border-radius:8px;
+      margin:8px 0;
+      font-size:15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Live Chat Wall</h1>
+    <p>Satu Pesan, Banyak Kenangan!</p>
+  </header>
 
-header p {
-  font-size: 18px;
-  margin-top: 10px;
-}
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="about.html">About Us</a>
+    <a href="memories.html">Memories</a>
+    <a href="data.html" class="active">Data</a>
+  </nav>
 
-nav {
-  text-align: center;
-  padding: 15px;
-  background: #004aad;
-}
+  <div class="container">
+    <h2>Kirim Pesan Anonim</h2>
 
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: 600;
-}
+    <form id="messageForm">
+      <textarea id="messageInput" placeholder="Tulis pesanmu di sini..." rows="3" required></textarea><br>
+      <button type="submit">Kirim</button>
+    </form>
 
-nav a.active {
-  text-decoration: underline;
-}
+    <div id="chatBox">
+      <!-- pesan baru langsung muncul di sini -->
+    </div>
+  </div>
 
-nav a:hover {
-  opacity: 0.8;
-}
+  <footer>
+    © 2025 Medis GELORA FEB
+  </footer>
 
-/* CONTAINER */
-.container {
-  padding: 40px;
-  text-align: center;
-}
+  <!-- Firebase Chat Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-/* HERO */
-.hero {
-  padding: 80px 20px;
-  text-align: center;
-  background: #f0f8ff;
-}
+    // Config Firebase kamu
+    const firebaseConfig = {
+      apiKey: "AIzaSyAKHu1lu6_GkSIp76g13gZc6sTZklqDWgs",
+      authDomain: "medis-gelora-feb-2025.firebaseapp.com",
+      databaseURL: "https://medis-gelora-feb-2025-default-rtdb.firebaseio.com",
+      projectId: "medis-gelora-feb-2025",
+      storageBucket: "medis-gelora-feb-2025.firebasestorage.app",
+      messagingSenderId: "900646419609",
+      appId: "1:900646419609:web:9e4d6104e2c56dc1520c08",
+      measurementId: "G-5B32T37VMZ"
+    };
 
-.hero-banner {
-  width: 100%;
-  aspect-ratio: 16/9;     
-  background-image: url("assets/foto_utama.png");
-  background-size: cover; /* isi penuh */
-  background-position: center; /* fokus tengah */
-  border-radius: 0;
-  margin: 20px 0;
-}
+    // Init Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
 
-.hero-img {
-  width: 100%;
-  aspect-ratio: 16/9;     
-  object-fit: contain;      
-  border-radius: 0;
-  margin: 20px 0;
-}
+    // Ref pesan
+    const messagesRef = ref(db, "messages");
 
-.hero h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  color: #004aad;
-}
+    // Submit pesan
+    document.getElementById("messageForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const text = document.getElementById("messageInput").value;
+      if (text.trim() !== "") {
+        push(messagesRef, { text: text, time: Date.now() });
+        document.getElementById("messageInput").value = "";
+      }
+    });
 
-.hero p {
-  font-size: 18px;
-  color: #444;
-}
-
-
-.team {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 20px;
-}
-
-.ucapan-dari-aku {
-  max-width: 80%;
-  margin: 40px auto;
-  text-align: center;
-  padding: 20px;
-  background: none;
-  border-radius: 12px;
-  box-shadow: none;
-}
-
-.ucapan-dari-aku p {
-  font-size: 18px;
-  color: #333;
-  line-height: 1.7;
-}
-
-.member {
-  width: 180px;
-  text-align: center;
-  background: #fff;
-  padding: 15px;
-  border-radius: 16px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-  transition: transform 0.2s;
-}
-
-.member:hover {
-  transform: translateY(-5px);
-}
-
-.member img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.name {
-  font-weight: 600;
-  font-size: 16px;
-  color: #222;
-}
-
-.prodi {
-  font-size: 14px;
-  color: #666;
-}
-
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.gallery img {
-  width: 280px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-
-table {
-  width: 80%;
-  margin: 0 auto;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-table, th, td {
-  border: 1px solid #ccc;
-}
-
-th, td {
-  padding: 12px;
-}
-
-th {
-  background: #004aad;
-  color: white;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #004aad;
-  color: white;
-  margin-top: 40px;
-}
+    // Tampilkan pesan realtime
+    const chatBox = document.getElementById("chatBox");
+    onChildAdded(messagesRef, (snapshot) => {
+      const msg = snapshot.val();
+      const p = document.createElement("p");
+      p.textContent = msg.text;
+      chatBox.appendChild(p);
+      chatBox.scrollTop = chatBox.scrollHeight; // auto scroll ke bawah
+    });
+  </script>
+</body>
+</html>
