@@ -100,27 +100,89 @@ nav a.active {
   text-align: justify;
 }
 
-/* ABOUT SECTION */
-.about {
-  max-width: 900px;
-  margin: 50px auto;
-  padding: 30px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-}
-.about h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  color: #004aad;
-  margin-bottom: 20px;
-}
-.about p {
-  text-align: justify;
-  margin-bottom: 15px;
+/* ===== TEAM SECTION ===== */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
 }
 
-/* FOOTER */
+.container h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #004aad;
+  margin-bottom: 30px;
+}
+
+.container h3 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Grid dasar tim */
+.team {
+  display: grid;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* Koor & Subkoor (2 kolom 1:1) */
+.koor-subkoor {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Staff ahli (3 kolom) */
+.staff-ahli {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+/* Staff muda (5 kolom, otomatis jadi 3 baris) */
+.staff-muda {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* Member styling */
+.member {
+  text-align: center;
+}
+
+.member img {
+  width: 100%;
+  aspect-ratio: 1/1;     /* foto jadi kotak 1:1 */
+  object-fit: cover;
+  border-radius: 12px;   /* sudut kotak, bukan bulet */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  margin-bottom: 10px;
+}
+
+.member .name {
+  font-weight: 700;
+  color: #000;
+}
+
+.member .prodi {
+  font-weight: 400;
+  color: #666;
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  .staff-muda {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .staff-ahli {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .koor-subkoor {
+    grid-template-columns: 1fr;
+  }
+}
+
 footer {
   text-align: center;
   padding: 20px;
