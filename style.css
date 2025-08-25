@@ -43,13 +43,13 @@ nav a.active {
 
 /* HERO BANNER */
 .hero-banner {
-  width: 90%;
+  width: 100%;
   max-width: 1000px;
   aspect-ratio: 16/9;
   background-image: url("assets/foto_utama.png");
   background-size: cover;
   background-position: center;
-  border-radius: 12px;
+  border-radius: 0;
   margin: 20px auto;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
@@ -97,7 +97,7 @@ nav a.active {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  text-align: justify;
+  text-align: center;
 }
 
 /* ===== TEAM SECTION ===== */
