@@ -59,7 +59,6 @@ nav a.active {
   padding: 30px 20px;
 }
 
-/* ==== UCAPAN DARI AKU (INDEX) ==== */
 .ucapan-dari-aku {
   background: white;
   padding: 25px;
@@ -70,24 +69,16 @@ nav a.active {
   max-width: 800px;
 }
 
-.ucapan-dari-aku h2 {
-  font-size: 1.6rem;
-  margin-bottom: 15px;
-  color: #007bff;
-}
-
 .ucapan-dari-aku p {
   font-size: 1.1rem;
-  color: #555;
+  color: #0000;
   line-height: 1.7;
 }
 
-/* ==== ABOUT US ==== */
-/* === GRID TEAM === */
 .team {
   display: grid;
   gap: 25px;
-  justify-items: center; /* semua rata tengah */
+  justify-items: center; 
   margin-bottom: 50px;
 }
 
@@ -131,7 +122,6 @@ nav a.active {
   margin-top: 4px;
 }
 
-
 .member:hover {
   transform: translateY(-5px);
 }
@@ -144,7 +134,7 @@ nav a.active {
   margin-bottom: 10px;
 }
 
-/* Responsif */
+/* ==== RESPONSIVE ==== */
 @media (max-width: 992px) {
   .staff-muda {
     grid-template-columns: repeat(3, 1fr);
@@ -153,7 +143,7 @@ nav a.active {
     grid-template-columns: repeat(2, 1fr);
     max-width: 500px;
     margin: 0 auto 40px;
-    gap: 20px:
+    gap: 20px; 
   }
 }
 
