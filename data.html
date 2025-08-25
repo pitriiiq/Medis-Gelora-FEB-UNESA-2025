@@ -2,20 +2,11 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Chat - Medis GELORA FEB 2025</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; margin:0; background:#fdfdfd; }
-    header { text-align:center; padding:60px 20px; background:linear-gradient(135deg,#005bea,#00c6fb); color:white; }
-    nav { text-align:center; background:#004aad; padding:15px; }
-    nav a { color:white; margin:0 15px; text-decoration:none; font-weight:600; }
-    nav a.active { text-decoration: underline; }
-    nav a:hover { opacity:0.8; }
-    .container { padding:40px; max-width:800px; margin:auto; }
-    h2 { color:#004aad; margin-bottom:20px; text-align:center; }
-    footer { text-align:center; padding:20px; background:#004aad; color:white; margin-top:40px; }
 
-    /* Chat Box */
+  <style>
     .chat-box {
       background: #fff;
       padding: 20px;
@@ -78,9 +69,9 @@
 
   <nav>
     <a href="index.html">Beranda</a>
-    <a href="about.html">About Us</a>
+    <a href="about.html" class="active">About Us</a>
     <a href="memories.html">Memories</a>
-    <a href="data.html" class="active">Data</a>
+    <a href="data.html">Data</a>
   </nav>
 
   <div class="container">
@@ -100,7 +91,7 @@
     © 2025 Medis GELORA FEB
   </footer>
 
-  <!-- Firebase Script (modular) -->
+  <!-- Firebase Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
     import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
@@ -116,7 +107,6 @@
       measurementId: "G-5B32T37VMZ"
     };
 
-    // Init Firebase
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const messagesRef = ref(db, "messages");
@@ -153,4 +143,3 @@
   </script>
 </body>
 </html>
-
