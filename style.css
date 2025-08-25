@@ -11,7 +11,6 @@ body {
   line-height: 1.6;
 }
 
-/* ==== HEADER ==== */
 header {
   text-align: center;
   padding: 40px 20px;
@@ -122,14 +121,27 @@ nav a.active {
   transition: transform 0.2s;
 }
 
+.member .name {
+  font-weight: 700;    
+  color: #000;         
+  margin-top: 8px;
+}
+
+.member .prodi {
+  font-weight: 400;     
+  color: #666;          
+  font-size: 0.9em;     
+  margin-top: 4px;
+}
+
+
 .member:hover {
   transform: translateY(-5px);
 }
 
-/* Foto kotak */
 .member img {
   width: 100%;
-  aspect-ratio: 1 / 1; /* selalu 1:1 */
+  aspect-ratio: 1 / 1; 
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 10px;
@@ -154,8 +166,6 @@ nav a.active {
   }
 }
 
-
-/* ==== FOOTER ==== */
 footer {
   text-align: center;
   padding: 20px;
