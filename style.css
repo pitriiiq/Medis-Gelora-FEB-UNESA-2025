@@ -69,7 +69,7 @@ nav a:hover {
 
 .hero-img {
   width: 100%;
-  aspect-ratio: 16/9;     /* bikin rasio fix 16:9 */
+  aspect-ratio: 16/9;     
   object-fit: contain;      
   border-radius: 12px;
   margin: 20px 0;
@@ -86,13 +86,29 @@ nav a:hover {
   color: #444;
 }
 
-/* TEAM */
+
 .team {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
   margin-top: 20px;
+}
+
+.ucapan-dari-aku {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.ucapan-dari-aku p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.6;
 }
 
 .member {
@@ -128,7 +144,6 @@ nav a:hover {
   color: #666;
 }
 
-/* GALLERY */
 .gallery {
   display: flex;
   flex-wrap: wrap;
@@ -144,7 +159,7 @@ nav a:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* TABLE */
+
 table {
   width: 80%;
   margin: 0 auto;
