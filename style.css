@@ -112,14 +112,11 @@
       measurementId: "G-5B32T37VMZ"
     };
 
-    // Init Firebase
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Ref pesan
     const messagesRef = ref(db, "messages");
 
-    // Submit pesan
     document.getElementById("messageForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const text = document.getElementById("messageInput").value;
@@ -129,7 +126,6 @@
       }
     });
 
-    // Format tanggal & jam
     function formatTime(ts) {
       const date = new Date(ts);
       const hours = String(date.getHours()).padStart(2, "0");
