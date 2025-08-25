@@ -188,7 +188,7 @@ nav a.active {
   }
 }
 
-/* GALLERY LANDSCAPE */
+/* GALLERY LANDSCAPE FIX */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -197,17 +197,17 @@ nav a.active {
 }
 
 .gallery img {
-  width: 100%;        
-  height: auto;       
+  width: 100%;     /* lebar penuh kolom */
+  height: auto;    /* tinggi otomatis ikut rasio gambar */
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   transition: transform 0.3s;
+  display: block;  /* biar ga ada spasi bawah */
 }
 
 .gallery img:hover {
   transform: scale(1.03);
 }
-
 
 footer {
   text-align: center;
