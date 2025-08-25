@@ -2,16 +2,18 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Data - Medis GELORA FEB 2025</title>
+  <title>Live Chat - Medis GELORA FEB 2025</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <style>
     body { font-family: 'Inter', sans-serif; margin:0; background:#fdfdfd; }
     header { text-align:center; padding:60px 20px; background:linear-gradient(135deg,#005bea,#00c6fb); color:white; }
     nav { text-align:center; background:#004aad; padding:15px; }
     nav a { color:white; margin:0 15px; text-decoration:none; font-weight:600; }
+    nav a.active { text-decoration: underline; }
+    nav a:hover { opacity:0.8; }
     .container { padding:40px; max-width:800px; margin:auto; }
     h2 { color:#004aad; margin-bottom:20px; text-align:center; }
+    footer { text-align:center; padding:20px; background:#004aad; color:white; margin-top:40px; }
 
     /* Chat Box */
     .chat-box {
@@ -20,6 +22,8 @@
       border-radius: 12px;
       box-shadow: 0 6px 14px rgba(0,0,0,0.08);
       margin-top: 30px;
+      max-height: 450px;
+      overflow-y: auto;
     }
 
     #chatForm textarea {
@@ -47,13 +51,7 @@
       background: #01337d;
     }
 
-    #messagesList {
-      list-style: none;
-      padding: 0;
-      margin-top: 20px;
-    }
-
-    #messagesList li {
+    .message {
       background: #f9f9f9;
       padding: 12px 16px;
       border-radius: 10px;
@@ -63,32 +61,38 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     }
 
-    footer { text-align:center; padding:20px; background:#004aad; color:white; margin-top:40px; }
+    .timestamp {
+      display:block;
+      font-size:12px;
+      color:#666;
+      margin-top:4px;
+      text-align:right;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Data Medis</h1>
-    <p>Satu Tindakan, Banyak Harapan!</p>
+    <h1>Live Chat Wall</h1>
+    <p>Satu Pesan, Banyak Kenangan!</p>
   </header>
 
   <nav>
     <a href="index.html">Beranda</a>
     <a href="about.html">About Us</a>
     <a href="memories.html">Memories</a>
-    <a href="data.html">Data</a>
+    <a href="data.html" class="active">Data</a>
   </nav>
 
   <div class="container">
-    <h2>Pesan Anonim</h2>
-    <div class="chat-box">
+    <h2>Kirim Pesan Anonim</h2>
+    <div class="chat-box" id="chatBox">
       <form id="chatForm">
         <textarea id="messageInput" placeholder="Tulis pesan kamu di sini..." required></textarea><br>
         <button type="submit">Kirim</button>
       </form>
 
       <h3>Pesan dari Pengunjung</h3>
-      <ul id="messagesList"></ul>
+      <div id="messagesList"></div>
     </div>
   </div>
 
@@ -96,47 +100,55 @@
     © 2025 Medis GELORA FEB
   </footer>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-  <script>
-    // 🔥 GANTI DENGAN KONFIGURASI FIREBASE PUNYA KAMU
+  <!-- Firebase Script (modular) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyAKHu1lu6_GkSIp76g13gZc6sTZklqDWgs",
+      authDomain: "medis-gelora-feb-2025.firebaseapp.com",
+      databaseURL: "https://medis-gelora-feb-2025-default-rtdb.firebaseio.com",
+      projectId: "medis-gelora-feb-2025",
+      storageBucket: "medis-gelora-feb-2025.firebasestorage.app",
+      messagingSenderId: "900646419609",
+      appId: "1:900646419609:web:9e4d6104e2c56dc1520c08",
+      measurementId: "G-5B32T37VMZ"
     };
 
     // Init Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const messagesRef = ref(db, "messages");
 
     const chatForm = document.getElementById("chatForm");
     const messageInput = document.getElementById("messageInput");
     const messagesList = document.getElementById("messagesList");
 
-    // Kirim pesan
     chatForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const message = messageInput.value.trim();
       if (message) {
-        db.ref("messages").push({
-          text: message,
-          timestamp: Date.now()
-        });
+        push(messagesRef, { text: message, time: Date.now() });
         messageInput.value = "";
       }
     });
-    
-    db.ref("messages").on("child_added", (snapshot) => {
+
+    function formatTime(ts) {
+      const date = new Date(ts);
+      return date.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) +
+             " - " + date.toLocaleDateString("id-ID");
+    }
+
+    onChildAdded(messagesRef, (snapshot) => {
       const msg = snapshot.val();
-      const li = document.createElement("li");
-      li.textContent = msg.text;
-      messagesList.prepend(li); 
+      const div = document.createElement("div");
+      div.classList.add("message");
+      div.innerHTML = `
+        ${msg.text}
+        <span class="timestamp">${formatTime(msg.time)}</span>
+      `;
+      messagesList.prepend(div);
     });
   </script>
 </body>
