@@ -12,9 +12,57 @@
     nav a { color:white; margin:0 15px; text-decoration:none; font-weight:600; }
     .container { padding:40px; max-width:800px; margin:auto; }
     h2 { color:#004aad; margin-bottom:20px; text-align:center; }
-    h3 { color:#01337d; margin-top:30px; margin-bottom:10px; }
-    ul { background:white; padding:20px 30px; border-radius:12px; box-shadow:0 6px 14px rgba(0,0,0,0.08); }
-    ul li { margin:8px 0; line-height:1.6; }
+
+    /* Chat Box */
+    .chat-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+      margin-top: 30px;
+    }
+
+    #chatForm textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      resize: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    #chatForm button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #004aad;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    #chatForm button:hover {
+      background: #01337d;
+    }
+
+    #messagesList {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    #messagesList li {
+      background: #f9f9f9;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      text-align: left;
+      font-size: 15px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    }
+
     footer { text-align:center; padding:20px; background:#004aad; color:white; margin-top:40px; }
   </style>
 </head>
@@ -32,29 +80,65 @@
   </nav>
 
   <div class="container">
-    <h2>Informasi Medis</h2>
+    <h2>Pesan Anonim</h2>
+    <div class="chat-box">
+      <form id="chatForm">
+        <textarea id="messageInput" placeholder="Tulis pesan kamu di sini..." required></textarea><br>
+        <button type="submit">Kirim</button>
+      </form>
 
-    <h3>List Obat</h3>
-    <ul>
-      <li>Paracetamol – untuk menurunkan demam dan meredakan nyeri ringan.</li>
-      <li>Ibuprofen – untuk peradangan dan nyeri otot.</li>
-      <li>Oralit – untuk mencegah dehidrasi akibat diare.</li>
-      <li>Povidone Iodine – antiseptik untuk luka luar.</li>
-      <li>Betadine – membersihkan luka kecil.</li>
-    </ul>
-
-    <h3>Cara Penanganan</h3>
-    <ul>
-      <li>Jika demam: istirahat cukup, minum banyak air, konsumsi Paracetamol bila perlu.</li>
-      <li>Jika luka ringan: bersihkan dengan antiseptik, balut dengan perban steril.</li>
-      <li>Jika pingsan: posisikan pasien telentang, longgarkan pakaian, beri udara segar.</li>
-      <li>Jika cedera ringan: kompres es, istirahatkan bagian yang sakit.</li>
-      <li>Jika diare: konsumsi Oralit, hindari makanan pedas/berminyak.</li>
-    </ul>
+      <h3>Pesan dari Pengunjung</h3>
+      <ul id="messagesList"></ul>
+    </div>
   </div>
 
   <footer>
     © 2025 Medis GELORA FEB
   </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+  <script>
+    // 🔥 GANTI DENGAN KONFIGURASI FIREBASE PUNYA KAMU
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Init Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const chatForm = document.getElementById("chatForm");
+    const messageInput = document.getElementById("messageInput");
+    const messagesList = document.getElementById("messagesList");
+
+    // Kirim pesan
+    chatForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const message = messageInput.value.trim();
+      if (message) {
+        db.ref("messages").push({
+          text: message,
+          timestamp: Date.now()
+        });
+        messageInput.value = "";
+      }
+    });
+    
+    db.ref("messages").on("child_added", (snapshot) => {
+      const msg = snapshot.val();
+      const li = document.createElement("li");
+      li.textContent = msg.text;
+      messagesList.prepend(li); 
+    });
+  </script>
 </body>
 </html>
+
