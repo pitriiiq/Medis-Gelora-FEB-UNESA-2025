@@ -227,12 +227,15 @@ nav a.active {
 
 .gallery-video {
   display: flex;
-  justify-content: center;  /* posisi tengah horizontal */
+  justify-content: center;   /* center horizontal */
+  align-items: center;       /* center vertical kalau ada tinggi container */
   margin-top: 20px;
 }
 
 .gallery-video video {
-  width: 70%;      /* bisa disesuaikan */
+  max-width: 70%;   /* batasi lebar */
+  max-height: 80vh; /* batasi tinggi biar nggak kepanjangan */
+  width: auto;      /* biar rasio aslinya terjaga */
   height: auto;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
