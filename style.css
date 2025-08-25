@@ -111,7 +111,7 @@ nav a.active {
 
 .about-closing p {
   max-width: 750px;  
-  margin: 20px anuto 40px;
+  margin: 20px auto 40px;  /* typo anuto sudah diperbaiki */
   font-size: 1.1rem;
   line-height: 1.6;
   text-align: center; 
@@ -119,8 +119,6 @@ nav a.active {
   color: #333;
 }
 
-
-/* ===== TEAM SECTION ===== */
 .container {
   max-width: 1100px;
   margin: 40px auto;
