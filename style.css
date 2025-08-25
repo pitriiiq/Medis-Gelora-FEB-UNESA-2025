@@ -1,163 +1,87 @@
+/* Reset dasar */
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: 'Inter', sans-serif;
-  background: #f8f9fa;
+  margin: 0;
+  background: #fdfdfd;
   color: #333;
-  line-height: 1.6;
 }
 
+/* Header */
 header {
   text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #0d3b66, #16404d); /* biru gelap gradasi */
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #004aad, #0077cc); /* biru lebih gelap, gradasi */
   color: white;
-  border-radius: 0 0 20px 20px;
 }
 
 header h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 header p {
+  margin: 10px 0 0;
   font-size: 1.2rem;
+  font-weight: 400;
 }
 
-/* ==== NAV ==== */
+/* Navbar */
 nav {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+  text-align: center;
+  background: #003b8e; /* biru solid */
   padding: 15px;
-  background: white;
-  border-bottom: 1px solid #ddd;
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
 nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 600;
-  padding: 8px 15px;
-  border-radius: 8px;
-  transition: background 0.3s, color 0.3s;
-}
-
-nav a:hover,
-nav a.active {
-  background: #007bff;
   color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 600;
 }
 
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Konten umum */
 .container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 30px 20px;
+  padding: 40px;
 }
 
-.ucapan-dari-aku {
-  background: white;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  margin: 40px auto;
+h2 {
   text-align: center;
-  max-width: 800px;
+  color: #004aad;
+  margin-bottom: 20px;
 }
 
-.ucapan-dari-aku p {
-  font-size: 1.1rem;
-  color: #0000;
-  line-height: 1.7;
+h3 {
+  color: #01337d;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
-.team {
+/* Gallery khusus memories */
+.gallery {
   display: grid;
-  gap: 25px;
-  justify-items: center; 
-  margin-bottom: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 
-/* koor & subkoor: 1:1 */
-.koor-subkoor {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-/* staff ahli: auto-fit responsif */
-.staff-ahli {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-}
-
-/* staff muda: fix 5 kolom */
-.staff-muda {
-  grid-template-columns: repeat(5, 1fr);
-}
-
-/* === CARD === */
-.member {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  padding: 15px;
-  text-align: center;
+.gallery img {
   width: 100%;
-  max-width: 200px; /* seragam */
-  transition: transform 0.2s;
-}
-
-.member .name {
-  font-weight: 700;    
-  color: #000;         
-  margin-top: 8px;
-}
-
-.member .prodi {
-  font-weight: 400;     
-  color: #666;          
-  font-size: 0.9em;     
-  margin-top: 4px;
-}
-
-.member:hover {
-  transform: translateY(-5px);
-}
-
-.member img {
-  width: 100%;
-  aspect-ratio: 1 / 1; 
+  height: 200px;
   object-fit: cover;
   border-radius: 12px;
-  margin-bottom: 10px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
-/* ==== RESPONSIVE ==== */
-@media (max-width: 992px) {
-  .staff-muda {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .koor-subkoor {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 500px;
-    margin: 0 auto 40px;
-    gap: 20px; 
-  }
-}
-
-@media (max-width: 600px) {
-  .staff-muda {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
+/* Footer */
 footer {
   text-align: center;
   padding: 20px;
-  background: #f1f1f1;
+  background: #003b8e;
+  color: white;
   margin-top: 40px;
-  border-top: 1px solid #ddd;
-  color: #555;
+  font-size: 0.9rem;
 }
